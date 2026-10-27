@@ -1,0 +1,18 @@
+package com.joutio.social.domain.port.in;
+
+import com.joutio.social.domain.command.UserFollowerCommand;
+import com.joutio.social.domain.model.FollowerIds;
+
+import java.util.concurrent.CompletableFuture;
+
+public interface FollowUserUseCase {
+    CompletableFuture<String> follow(UserFollowerCommand.FollowUserCommand command);
+
+    default CompletableFuture<String> follow(String followerId, String followedId) {
+        return follow(new UserFollowerCommand.FollowUserCommand(FollowerIds.user(followerId, followedId), followerId, followedId));
+    }
+
+    default CompletableFuture<String> follow(String followId, String followerId, String followedId) {
+        return follow(new UserFollowerCommand.FollowUserCommand(followId, followerId, followedId));
+    }
+}

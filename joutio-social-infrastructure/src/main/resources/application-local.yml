@@ -1,0 +1,13 @@
+server:
+  port: 8087
+
+spring:
+  config:
+    import: optional:classpath:joutio-local.yml
+    activate:
+      on-profile: local
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/joutio_social
+    username: postgres
+    password: postgres

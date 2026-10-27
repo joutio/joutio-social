@@ -1,0 +1,46 @@
+package com.joutio.social.application.projection;
+
+import com.joutio.social.domain.event.UserFollowerEvent;
+import com.joutio.social.domain.model.FollowerIds;
+import com.joutio.social.domain.model.UserFollower;
+import com.joutio.social.domain.port.out.UserFollowerRepositoryPort;
+import org.axonframework.config.ProcessingGroup;
+import org.axonframework.eventhandling.EventHandler;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * Projection du suivi des joueurs. La clé est la <b>clé naturelle</b>
+ * ({@code followerId:followedId}) : upsert/delete idempotent et tolérant aux doublons (rejeu).
+ */
+@Component
+@ProcessingGroup("user-follower-projection")
+public class UserFollowerProjection {
+
+    private final UserFollowerRepositoryPort userFollowerRepositoryPort;
+
+    public UserFollowerProjection(UserFollowerRepositoryPort userFollowerRepositoryPort) {
+        this.userFollowerRepositoryPort = userFollowerRepositoryPort;
+    }
+
+    @EventHandler
+    @Transactional
+    public void on(UserFollowerEvent.UserFollowedEvent event) {
+        userFollowerRepositoryPort.save(
+                new UserFollower(
+                        FollowerIds.user(event.followerId(), event.followedId()),
+                        event.followerId(),
+                        event.followedId(),
+                        event.followedAt()
+                )
+        );
+    }
+
+    @EventHandler
+    @Transactional
+    public void on(UserFollowerEvent.UserUnfollowedEvent event) {
+        userFollowerRepositoryPort.deleteById(
+                FollowerIds.user(event.followerId(), event.followedId())
+        );
+    }
+}

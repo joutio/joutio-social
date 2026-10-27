@@ -1,0 +1,82 @@
+package com.joutio.social.infrastructure.out.persistence.adapter;
+
+import com.joutio.microservice.core.infrastructure.in.api.response.SearchResponse;
+import com.joutio.microservice.core.infrastructure.in.api.request.SearchRequest;
+import com.joutio.microservice.core.infrastructure.adapter.AnnotationSearchableEntity;
+import com.joutio.microservice.core.infrastructure.adapter.JpaSearchAdapter;
+import com.joutio.social.domain.model.UserFollower;
+import com.joutio.social.domain.port.out.UserFollowerRepositoryPort;
+import com.joutio.social.infrastructure.out.persistence.entity.UserFollowerEntity;
+import com.joutio.social.infrastructure.out.persistence.mapper.UserFollowerEntityMapper;
+import com.joutio.social.infrastructure.out.persistence.repository.UserFollowerJpaRepository;
+import org.springframework.data.domain.Limit;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Optional;
+
+@Component
+public class UserFollowerRepositoryAdapter implements UserFollowerRepositoryPort {
+
+    private final UserFollowerJpaRepository userFollowerJpaRepository;
+    private final JpaSearchAdapter<UserFollowerEntity> userFollowerSearchAdapter;
+
+    public UserFollowerRepositoryAdapter(UserFollowerJpaRepository userFollowerJpaRepository) {
+        this.userFollowerJpaRepository = userFollowerJpaRepository;
+        this.userFollowerSearchAdapter = new JpaSearchAdapter<>(
+                userFollowerJpaRepository,
+                new AnnotationSearchableEntity(UserFollowerEntity.class)
+        );
+    }
+
+    @Override
+    public void save(UserFollower userFollower) {
+        userFollowerJpaRepository.save(UserFollowerEntityMapper.toEntity(userFollower));
+    }
+
+    @Override
+    public Optional<UserFollower> findById(String followId) {
+        return userFollowerJpaRepository.findById(followId)
+                .map(UserFollowerEntityMapper::toDomain);
+    }
+
+    @Override
+    public void deleteById(String followId) {
+        userFollowerJpaRepository.deleteById(followId);
+    }
+
+    @Override
+    public boolean exists(String followerId, String followedId) {
+        return userFollowerJpaRepository.existsByFollowerIdAndFollowedId(followerId, followedId);
+    }
+
+    @Override
+    public SearchResponse<UserFollower> findAll(SearchRequest request) {
+        return userFollowerSearchAdapter.findAll(request)
+                .map(UserFollowerEntityMapper::toDomain);
+    }
+
+    @Override
+    public long countFollowing(String userId) {
+        return userFollowerJpaRepository.countByFollowerId(userId);
+    }
+
+    @Override
+    public long countFollowers(String userId) {
+        return userFollowerJpaRepository.countByFollowedId(userId);
+    }
+
+    @Override
+    public List<UserFollower> findFollowing(String followerId, int limit) {
+        return userFollowerJpaRepository.findByFollowerIdOrderByFollowedAtDesc(followerId, Limit.of(limit)).stream()
+                .map(UserFollowerEntityMapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public List<UserFollower> findFollowers(String followedId, int limit) {
+        return userFollowerJpaRepository.findByFollowedIdOrderByFollowedAtDesc(followedId, Limit.of(limit)).stream()
+                .map(UserFollowerEntityMapper::toDomain)
+                .toList();
+    }
+}

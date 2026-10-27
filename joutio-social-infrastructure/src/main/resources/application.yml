@@ -1,0 +1,24 @@
+spring:
+  config:
+    import: optional:classpath:joutio-defaults.yml
+  application:
+    name: joutio-social
+  profiles:
+    default: local
+
+  flyway:
+    locations: classpath:db/migration/social
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+microservice:
+  swagger:
+    description: Joutio Social Module - Topic and player follows, and 1v1 challenges
+  websocket:
+    # Surface REST/WS portée par le BFF ; les services sont headless.
+    enabled: false
+
+

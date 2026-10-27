@@ -1,0 +1,26 @@
+package com.joutio.social.domain.port.out;
+
+import com.joutio.microservice.core.infrastructure.in.api.response.SearchResponse;
+import com.joutio.microservice.core.infrastructure.in.api.request.SearchRequest;
+import com.joutio.social.domain.model.TopicFollower;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface TopicFollowerRepositoryPort {
+
+    void save(TopicFollower topicFollower);
+
+    Optional<TopicFollower> findById(String followId);
+
+    void deleteById(String followId);
+
+    boolean exists(String topicId, String userId);
+
+    SearchResponse<TopicFollower> findAll(SearchRequest request);
+
+    /**
+     * Sujets suivis par le joueur, plus récents d'abord.
+     */
+    List<TopicFollower> findByUser(String userId, int limit);
+}

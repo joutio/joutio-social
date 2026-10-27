@@ -1,0 +1,21 @@
+package com.joutio.social.domain.command;
+
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
+
+public interface TopicFollowerCommand {
+
+    String followId();
+
+    record FollowTopicCommand(
+            @TargetAggregateIdentifier String followId,
+            String topicId,
+            String userId
+    ) implements TopicFollowerCommand {
+    }
+
+    record UnfollowTopicCommand(
+            @TargetAggregateIdentifier String followId,
+            String actorId
+    ) implements TopicFollowerCommand {
+    }
+}

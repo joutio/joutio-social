@@ -1,0 +1,211 @@
+## [5.4.0](https://github.com/joutio/joutio-social/compare/v5.3.1...v5.4.0) (2026-10-22)
+
+### Features
+
+* **account:** efface les abonnements du compte supprimé ([f2463ba](https://github.com/joutio/joutio-social/commit/f2463ba1428df31d6492b4d6fda17fe7ede202b9))
+
+## [5.3.1](https://github.com/joutio/joutio-social/compare/v5.3.0...v5.3.1) (2026-10-12)
+
+### Bug Fixes
+
+* **social:** SDK joutio-parent 4.7.1 (cycle de beans Configuration/bus distribué au démarrage) ([bf02bad](https://github.com/joutio/joutio-social/commit/bf02bad8370c0331a93add87d05d39f04516dae8))
+
+## [5.3.0](https://github.com/joutio/joutio-social/compare/v5.2.0...v5.3.0) (2026-10-12)
+
+### Features
+
+* **console:** consume joutio-sdk 4.7.0 (lag, commandes en vol, snapshots, scheduled) ([d37f88d](https://github.com/joutio/joutio-social/commit/d37f88d1a97e5a8f68153432d6e80d2a0e586196))
+
+## [5.2.0](https://github.com/joutio/joutio-social/compare/v5.1.0...v5.2.0) (2026-10-12)
+
+### Features
+
+* **console:** consume joutio-sdk 4.6.0 (build-info + API interne event store/scheduled) ([920a8ff](https://github.com/joutio/joutio-social/commit/920a8ff8e6fd3570e143ed5965eeeb2e65d24bd5))
+
+## [5.1.0](https://github.com/joutio/joutio-social/compare/v5.0.0...v5.1.0) (2026-10-12)
+
+### Features
+
+* **console:** consume joutio-sdk 4.5.2 (DLQ Axon par défaut + agent console) ([c0d2d61](https://github.com/joutio/joutio-social/commit/c0d2d61f0e92a06a0cb7a275d97668dbe4626ea5))
+
+## [5.0.0](https://github.com/joutio/joutio-social/compare/v4.0.0...v5.0.0) (2026-10-12)
+
+### ⚠ BREAKING CHANGES
+
+* **social:** ProfileRepositoryPort retiré du domaine social.
+
+### Code Refactoring
+
+* **social:** supprime la vérification d'existence du profil (agrégat sans I/O) ([d366931](https://github.com/joutio/joutio-social/commit/d366931957046a12b59ab5438def62b8a1c99862))
+
+## [4.0.0](https://github.com/joutio/joutio-social/compare/v3.0.1...v4.0.0) (2026-10-02)
+
+### ⚠ BREAKING CHANGES
+
+* **social:** remove challenges bounded context
+
+### Features
+
+* **social:** remove challenges bounded context ([3abab9f](https://github.com/joutio/joutio-social/commit/3abab9fc9fc814d16a8eaca9eb19fa58c70542b6))
+
+## [3.0.1](https://github.com/joutio/joutio-social/compare/v3.0.0...v3.0.1) (2026-09-30)
+
+### Bug Fixes
+
+* **social:** guard challenge languages at creation/acceptance and fail challenged games ([dbca2b1](https://github.com/joutio/joutio-social/commit/dbca2b11090e3557c68ff542ab3254fd882f101a))
+
+## [3.0.0](https://github.com/joutio/joutio-social/compare/v2.1.0...v3.0.0) (2026-09-30)
+
+### ⚠ BREAKING CHANGES
+
+* **social:** ChallengeProfile carries the player language; accept is guarded by topic language availability (TopicAvailabilityPort); ChallengeSaga forwards required languages to CreateGameCommand (pins SDK 4.1.0, profile 3.0.0, game 4.0.0, theme 4.0.0).
+
+### Features
+
+* **social:** language-aware challenge acceptance and game creation ([e57cd7f](https://github.com/joutio/joutio-social/commit/e57cd7f809a69d29fbbfab9d98c0b0cf060e2087))
+
+## [2.1.0](https://github.com/joutio/joutio-social/compare/v2.0.0...v2.1.0) (2026-09-27)
+
+### Features
+
+* **social:** challenge completion, dedicated box/follow queries and actor-checked unfollows ([bdfc635](https://github.com/joutio/joutio-social/commit/bdfc635f48604e67ccdf70e2e0715f75d364437f))
+
+## [2.0.0](https://github.com/joutio/joutio-social/compare/v1.7.3...v2.0.0) (2026-09-25)
+
+### ⚠ BREAKING CHANGES
+
+* **social:** the service no longer exposes its REST API nor WebSocket
+(the BFF is the sole surface); search use cases now use the SDK SearchRequest/
+SearchResponse DTOs.
+
+### Features
+
+* **social:** headless service (REST + WS removed) + SDK search contracts ([5168e4c](https://github.com/joutio/joutio-social/commit/5168e4c6b83a3f60d5cf2d69cad4bba11d4b0f8e))
+
+## [1.7.3](https://github.com/joutio/joutio-social/compare/v1.7.2...v1.7.3) (2026-09-24)
+
+### Bug Fixes
+
+* **deps:** bump joutio-parent to 2.4.4 (typed PageResult over query transport) ([b1ad3ca](https://github.com/joutio/joutio-social/commit/b1ad3caca91df5f09242187c5f3ad678155894cf))
+
+## [1.7.2](https://github.com/joutio/joutio-social/compare/v1.7.1...v1.7.2) (2026-09-24)
+
+### Bug Fixes
+
+* **deps:** bump joutio-parent to 2.4.3 (bus-only search criteria type info) ([b400084](https://github.com/joutio/joutio-social/commit/b4000847da93f9de9b8a243843857066125651a9))
+
+## [1.7.1](https://github.com/joutio/joutio-social/compare/v1.7.0...v1.7.1) (2026-09-24)
+
+### Bug Fixes
+
+* **deps:** bump joutio-parent to 2.4.2 (search criteria type info) ([734e523](https://github.com/joutio/joutio-social/commit/734e523a13c23f526368e72f4bf0b96aa859f18f))
+
+## [1.7.0](https://github.com/joutio/joutio-social/compare/v1.6.4...v1.7.0) (2026-09-23)
+
+### Features
+
+* **social:** REST alignment (follows GET by-id, unfollow 204, cancel as action) and bump SDK to 2.4.1 ([b24c9e9](https://github.com/joutio/joutio-social/commit/b24c9e9fbc64f97bcca0276bb05169fb58eebef6))
+
+## [1.6.4](https://github.com/joutio/joutio-social/compare/v1.6.3...v1.6.4) (2026-09-22)
+
+### Bug Fixes
+
+* **joutio-social:** upgrade joutio-parent to 2.3.4 ([b0e5d86](https://github.com/joutio/joutio-social/commit/b0e5d86e0ea674a236d0875f4d212c1931d6cc11))
+
+## [1.6.3](https://github.com/joutio/joutio-social/compare/v1.6.2...v1.6.3) (2026-09-22)
+
+### Bug Fixes
+
+* **joutio-social:** upgrade joutio-parent to 2.3.3 ([7702041](https://github.com/joutio/joutio-social/commit/7702041076d65218d141ab93e25f8381657cbe07))
+
+## [1.6.2](https://github.com/joutio/joutio-social/compare/v1.6.1...v1.6.2) (2026-09-22)
+
+### Bug Fixes
+
+* **joutio-social:** upgrade joutio-parent to 2.3.2 ([5ee95e7](https://github.com/joutio/joutio-social/commit/5ee95e77278a18c4068acfc5aea197641388bae4))
+
+## [1.6.1](https://github.com/joutio/joutio-social/compare/v1.6.0...v1.6.1) (2026-09-22)
+
+### Bug Fixes
+
+* **social:** upgrade joutio-parent to 2.3.1 (registration address fix) ([8749772](https://github.com/joutio/joutio-social/commit/87497728827a1050ce402f1290e634c4742dd41d))
+
+## [1.6.0](https://github.com/joutio/joutio-social/compare/v1.5.0...v1.6.0) (2026-09-22)
+
+### Features
+
+* **social:** explicit Axon processing groups ([e631e94](https://github.com/joutio/joutio-social/commit/e631e9414b96d35cac0f0ca79b0d5ea8d84141ac))
+
+## [1.5.0](https://github.com/joutio/joutio-social/compare/v1.4.5...v1.5.0) (2026-09-21)
+
+### Features
+
+* **follow:** deterministic ids and idempotent non-destructive aggregates ([3825660](https://github.com/joutio/joutio-social/commit/38256600e63565b09ced764c572326420aeeb746))
+
+### Bug Fixes
+
+* **observability:** keep readable console logs in local ([6c17f06](https://github.com/joutio/joutio-social/commit/6c17f06c429875d20ee84ee0060111d8f9ce9d3d))
+
+## [1.4.5](https://github.com/joutio/joutio-social/compare/v1.4.4...v1.4.5) (2026-09-20)
+
+### Bug Fixes
+
+* **deps:** bump joutio-sdk to 2.1.1 ([d978a1e](https://github.com/joutio/joutio-social/commit/d978a1e94dd79a7d07d0dee7bfa0cf4ec8c5ddfb))
+
+## [1.4.4](https://github.com/joutio/joutio-social/compare/v1.4.3...v1.4.4) (2026-09-20)
+
+### Bug Fixes
+
+* **config:** align prod service URLs with joutio-* names ([67ff650](https://github.com/joutio/joutio-social/commit/67ff650f3c775570f8046f191719f78344053bea))
+
+## [1.4.3](https://github.com/joutio/joutio-social/compare/v1.4.2...v1.4.3) (2026-09-20)
+
+### Bug Fixes
+
+* **deps:** bump joutio-sdk to 2.1.0 ([d03b206](https://github.com/joutio/joutio-social/commit/d03b2068cc5b683d937b954d4471675bc6cb895a))
+
+## [1.4.2](https://github.com/joutio/joutio-social/compare/v1.4.1...v1.4.2) (2026-09-20)
+
+### Bug Fixes
+
+* **observability:** remove WebSocket and business KPI metrics (consume joutio-sdk 1.4.3) ([736b987](https://github.com/joutio/joutio-social/commit/736b98797a498547e602599055d813ad04cece2a))
+
+## [1.4.1](https://github.com/joutio/joutio-social/compare/v1.4.0...v1.4.1) (2026-09-20)
+
+### Bug Fixes
+
+* **observability:** consume joutio-sdk 1.4.2 (Axon activity metrics fix + Swagger server URL) ([d8d3e9d](https://github.com/joutio/joutio-social/commit/d8d3e9dfb1b7747aec295c6639e5d1e3010716a8))
+
+## [1.4.0](https://github.com/joutio/joutio-social/compare/v1.3.0...v1.4.0) (2026-09-20)
+
+### Features
+
+* **observability:** consume joutio-sdk 1.4.0 (Axon activity metrics) ([f57a712](https://github.com/joutio/joutio-social/commit/f57a712e87f998c401400f7d23100629f382fb95))
+
+## [1.3.0](https://github.com/joutio/joutio-social/compare/v1.2.0...v1.3.0) (2026-09-20)
+
+### Features
+
+* **observability:** social KPIs (follows, challenges) + consume joutio-sdk 1.3.0 ([7d0260a](https://github.com/joutio/joutio-social/commit/7d0260aa8c332e019ad20219a73408d3e3577011))
+
+## [1.2.0](https://github.com/joutio/joutio-social/compare/v1.1.0...v1.2.0) (2026-09-20)
+
+### Features
+
+* **observability:** consume joutio-sdk 1.2.0 (structured logs + tracing) ([167a8e6](https://github.com/joutio/joutio-social/commit/167a8e62fd22aee6b317619e40c13e25fc499b6e))
+
+## [1.1.0](https://github.com/joutio/joutio-social/compare/v1.0.0...v1.1.0) (2026-09-20)
+
+### Features
+
+* **observability:** consume joutio-sdk 1.1.0 (Prometheus metrics) ([51f141a](https://github.com/joutio/joutio-social/commit/51f141aff654ec50109b5040c9f6fa3c95072602))
+
+## 1.0.0 (2026-09-19)
+
+### Features
+
+* first commit ([82fa176](https://github.com/joutio/joutio-social/commit/82fa176ec3518a494285a5f91a631d335f3032a4))
+
+### Bug Fixes
+
+* **maven:** pin inter-service domains to 0.0.1; align parent to joutio-parent 1.0.0 ([12c08a9](https://github.com/joutio/joutio-social/commit/12c08a9d1aed95c7305050cc9292fb8608f7f385))

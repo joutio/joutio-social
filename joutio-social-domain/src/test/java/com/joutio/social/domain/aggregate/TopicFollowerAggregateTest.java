@@ -1,0 +1,82 @@
+package com.joutio.social.domain.aggregate;
+
+import com.joutio.axon.test.JoutioAxonMatchers;
+import com.joutio.social.domain.command.TopicFollowerCommand;
+import com.joutio.social.domain.event.TopicFollowerEvent;
+import com.joutio.social.domain.exception.SocialExceptions;
+import org.axonframework.test.aggregate.AggregateTestFixture;
+import org.junit.jupiter.api.Test;
+
+import java.time.Instant;
+
+/**
+ * Test Axon in-memory de l'agrégat {@link TopicFollowerAggregate}.
+ * <p>
+ * 100 % in-memory, sans dépendance externe : l'unicité vient de l'id déterministe et le suivi
+ * est non destructif (re-suivi idempotent).
+ */
+class TopicFollowerAggregateTest {
+
+    private final AggregateTestFixture<TopicFollowerAggregate> fixture =
+            new AggregateTestFixture<>(TopicFollowerAggregate.class);
+
+    @Test
+    void followTopic_appliesTopicFollowedEvent() {
+        fixture.givenNoPriorActivity()
+                .when(new TopicFollowerCommand.FollowTopicCommand("user-1:topic-1", "topic-1", "user-1"))
+                .expectEventsMatching(JoutioAxonMatchers.singlePayloadMatching(
+                        TopicFollowerEvent.TopicFollowedEvent.class,
+                        e -> ((TopicFollowerEvent.TopicFollowedEvent) e).followId().equals("user-1:topic-1")
+                                && ((TopicFollowerEvent.TopicFollowedEvent) e).topicId().equals("topic-1")
+                                && ((TopicFollowerEvent.TopicFollowedEvent) e).userId().equals("user-1")));
+    }
+
+    @Test
+    void followTopic_whenAlreadyFollowed_isIdempotent() {
+        fixture.given(new TopicFollowerEvent.TopicFollowedEvent(
+                        "user-1:topic-1", "topic-1", "user-1", Instant.now()))
+                .when(new TopicFollowerCommand.FollowTopicCommand("user-1:topic-1", "topic-1", "user-1"))
+                .expectNoEvents();
+    }
+
+    @Test
+    void unfollowTopic_thenFollowAgain_reappliesFollowedEvent() {
+        fixture.given(
+                        new TopicFollowerEvent.TopicFollowedEvent(
+                                "user-1:topic-1", "topic-1", "user-1", Instant.now()),
+                        new TopicFollowerEvent.TopicUnfollowedEvent(
+                                "user-1:topic-1", "topic-1", "user-1", Instant.now()))
+                .when(new TopicFollowerCommand.FollowTopicCommand("user-1:topic-1", "topic-1", "user-1"))
+                .expectEventsMatching(JoutioAxonMatchers.singlePayloadMatching(
+                        TopicFollowerEvent.TopicFollowedEvent.class,
+                        e -> ((TopicFollowerEvent.TopicFollowedEvent) e).followId().equals("user-1:topic-1")));
+    }
+
+    @Test
+    void unfollowTopic_whenAlreadyUnfollowed_isIdempotent() {
+        fixture.given(new TopicFollowerEvent.TopicFollowedEvent(
+                        "user-1:topic-1", "topic-1", "user-1", Instant.now()),
+                        new TopicFollowerEvent.TopicUnfollowedEvent(
+                                "user-1:topic-1", "topic-1", "user-1", Instant.now()))
+                .when(new TopicFollowerCommand.UnfollowTopicCommand("user-1:topic-1", "user-1"))
+                .expectNoEvents();
+    }
+
+    @Test
+    void unfollowTopic_byOwner_appliesTopicUnfollowedEvent() {
+        fixture.given(new TopicFollowerEvent.TopicFollowedEvent(
+                        "user-1:topic-1", "topic-1", "user-1", Instant.now()))
+                .when(new TopicFollowerCommand.UnfollowTopicCommand("user-1:topic-1", "user-1"))
+                .expectEventsMatching(JoutioAxonMatchers.singlePayloadMatching(
+                        TopicFollowerEvent.TopicUnfollowedEvent.class,
+                        e -> ((TopicFollowerEvent.TopicUnfollowedEvent) e).followId().equals("user-1:topic-1")));
+    }
+
+    @Test
+    void unfollowTopic_byAnotherUser_isRejected() {
+        fixture.given(new TopicFollowerEvent.TopicFollowedEvent(
+                        "user-1:topic-1", "topic-1", "user-1", Instant.now()))
+                .when(new TopicFollowerCommand.UnfollowTopicCommand("user-1:topic-1", "user-2"))
+                .expectException(SocialExceptions.NotFollowOwnerProblem.class);
+    }
+}
