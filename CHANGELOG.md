@@ -1,3 +1,10 @@
+## 1.0.0 (2026-10-27)
+
+### Features
+
+* release Joutio social 1.0.0 ([ba42c33](https://github.com/joutio/joutio-social/commit/ba42c3325dc8fd30ad192c858e662e35c52c82eb))
+* release Joutio social 1.0.0 ([987bb43](https://github.com/joutio/joutio-social/commit/987bb43b6d7aeacc54d9d36e65892a8d137078bb))
+
 ## [5.4.0](https://github.com/joutio/joutio-social/compare/v5.3.1...v5.4.0) (2026-10-22)
 
 ### Features
