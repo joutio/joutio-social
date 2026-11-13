@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/joutio/joutio-social/compare/v1.0.0...v1.1.0) (2026-11-13)
+
+### Features
+
+* **social:** referred players follow their sponsor ([7af1d5e](https://github.com/joutio/joutio-social/commit/7af1d5edea68a9ed2a35a6809db5fe56e7abb16f))
+
 ## 1.0.0 (2026-10-27)
 
 ### Features
