@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/joutio/joutio-social/compare/v1.1.0...v1.1.1) (2026-11-17)
+
+### Bug Fixes
+
+* **deps:** joutio-parent 1.1.0, unknown enum constants tolerated on the Axon transport ([84ff302](https://github.com/joutio/joutio-social/commit/84ff3025910d3a97e88f0d37c0abe03fac44dd1c))
+
 ## [1.1.0](https://github.com/joutio/joutio-social/compare/v1.0.0...v1.1.0) (2026-11-13)
 
 ### Features
