@@ -1,17 +1,6 @@
-# joutio-social (staging local)
+# joutio-social
 
-Structure cible en 2 sous-modules Maven :
+Abonnements aux sujets et aux joueurs.
 
-- `joutio-social-domain`
-- `joutio-social-infrastructure`
-
-Seul `joutio-social-domain` est importable inter-services.
-
-Le code applicatif reste organise sous `com.joutio.social.application.*` dans le module infrastructure.
-
-Le module regroupe désormais :
-
-- les demandes d'amitié
-- les amitiés
-- les challenges entre joueurs
-
+Service du workspace Joutio : règles, état et commandes dans [`AGENTS.md`](AGENTS.md) ; documentation
+commune dans `docs/` du workspace.

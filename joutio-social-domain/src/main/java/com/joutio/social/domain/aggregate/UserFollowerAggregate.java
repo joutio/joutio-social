@@ -24,7 +24,7 @@ import java.time.Instant;
  *
  * <p><b>Aucune I/O</b> : l'existence de la cible n'est pas vérifiée ici (une cible inconnue n'a
  * simplement pas de projection et reste invisible). L'agrégat ne fait que valider les invariants
- * de la commande (voir {@code best-practices/.backend/command-preparation.md}).</p>
+ * de la commande (voir {@code docs/backend/axon.md}).</p>
  */
 @Getter
 @Aggregate
