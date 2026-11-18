@@ -1,3 +1,9 @@
+## [1.1.4](https://github.com/joutio/joutio-social/compare/v1.1.3...v1.1.4) (2026-11-18)
+
+### Bug Fixes
+
+* **deps:** joutio-parent 2.0.0, idle-friendly processors and bytea Axon schema ([117fc05](https://github.com/joutio/joutio-social/commit/117fc0578daeeb9c9fd8f86bcc25a1e41eacd7f9))
+
 ## [1.1.3](https://github.com/joutio/joutio-social/compare/v1.1.2...v1.1.3) (2026-11-17)
 
 ### Bug Fixes
