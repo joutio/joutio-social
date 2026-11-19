@@ -1,3 +1,9 @@
+## [1.1.5](https://github.com/joutio/joutio-social/compare/v1.1.4...v1.1.5) (2026-11-19)
+
+### Bug Fixes
+
+* **deps:** joutio-parent 2.1.0, consistent command routing across replicas ([ef088e9](https://github.com/joutio/joutio-social/commit/ef088e90408621647b8d6231ad8058960b54334b))
+
 ## [1.1.4](https://github.com/joutio/joutio-social/compare/v1.1.3...v1.1.4) (2026-11-18)
 
 ### Bug Fixes
