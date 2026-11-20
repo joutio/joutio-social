@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/joutio/joutio-social/compare/v1.1.12...v1.2.0) (2026-11-20)
+
+### Features
+
+* **block:** block and unblock a player ([c578da4](https://github.com/joutio/joutio-social/commit/c578da45b678d0c39c5565645822b7cad59ee3b7))
+
 ## [1.1.12](https://github.com/joutio/joutio-social/compare/v1.1.11...v1.1.12) (2026-11-20)
 
 ### Bug Fixes
