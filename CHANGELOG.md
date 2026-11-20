@@ -1,3 +1,9 @@
+## [1.1.11](https://github.com/joutio/joutio-social/compare/v1.1.10...v1.1.11) (2026-11-20)
+
+### Performance Improvements
+
+* **docker:** JDK 25 AOT cache at startup ([39517cd](https://github.com/joutio/joutio-social/commit/39517cda28da5d3983471b3a4aca6f97ba3ce5ea))
+
 ## [1.1.10](https://github.com/joutio/joutio-social/compare/v1.1.9...v1.1.10) (2026-11-20)
 
 ### Bug Fixes
