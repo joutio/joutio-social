@@ -1,3 +1,9 @@
+## [1.1.8](https://github.com/joutio/joutio-social/compare/v1.1.7...v1.1.8) (2026-11-20)
+
+### Bug Fixes
+
+* **deps:** joutio-parent 2.3.0, readiness waits for instance-scoped processors ([214e259](https://github.com/joutio/joutio-social/commit/214e259004b8d8cbe413f8c81d41f7d1914d72cc))
+
 ## [1.1.7](https://github.com/joutio/joutio-social/compare/v1.1.6...v1.1.7) (2026-11-20)
 
 ### Bug Fixes
