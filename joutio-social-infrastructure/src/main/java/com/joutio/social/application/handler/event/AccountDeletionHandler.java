@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-/** Supprime les relations de suivi d'un compte supprimé. */
+/** Supprime les relations de suivi et les blocages d'un compte supprimé. */
 @Component
 @ProcessingGroup("account-deletion-social")
 public class AccountDeletionHandler {
@@ -30,10 +30,15 @@ public class AccountDeletionHandler {
                 SELECT follow_id FROM topic_follower WHERE user_id = ?
                 UNION
                 SELECT follow_id FROM user_follower WHERE follower_id = ? OR followed_id = ?
-                """, String.class, userId, userId, userId);
+                UNION
+                SELECT block_id FROM player_block WHERE blocker_id = ? OR blocked_id = ?
+                """, String.class, userId, userId, userId, userId, userId);
         jdbcTemplate.update("DELETE FROM topic_follower WHERE user_id = ?", userId);
         jdbcTemplate.update(
                 "DELETE FROM user_follower WHERE follower_id = ? OR followed_id = ?",
+                userId, userId);
+        jdbcTemplate.update(
+                "DELETE FROM player_block WHERE blocker_id = ? OR blocked_id = ?",
                 userId, userId);
         eventStoreErasureService.eraseAggregates(followIds);
     }

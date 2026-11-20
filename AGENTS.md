@@ -1,7 +1,7 @@
 # AGENTS.md — joutio-social
 
-Abonnements **unidirectionnels** aux sujets (`TopicFollower`) et aux joueurs (`UserFollower`). Pas
-d'amitié, de demande ni de favori. Package `com.joutio.social`, base `joutio_social`, port local
+Abonnements **unidirectionnels** aux sujets (`TopicFollower`) et aux joueurs (`UserFollower`), et **blocages**
+entre joueurs (`PlayerBlock`). Pas d'amitié, de demande ni de favori. Package `com.joutio.social`, base `joutio_social`, port local
 8087. Service headless.
 
 Lire : `../../AGENTS.md`, [`docs/backend/`](../../docs/backend/hexagonal.md), exposition dans
@@ -13,6 +13,10 @@ Lire : `../../AGENTS.md`, [`docs/backend/`](../../docs/backend/hexagonal.md), ex
   (`UnfollowUserCommand(followId, actorId)`, `NotFollowOwnerProblem`, catégorie `PERMISSION`).
 - L'existence de la cible n'est pas vérifiée : un sujet ou un joueur inconnu n'a pas de projection
   et reste invisible. Aucune I/O dans les handlers.
+- **Blocage** (`PlayerBlockAggregate`, id `blockerId:blockedId`, non destructif) : `BlockPlayerCommand`,
+  `UnblockPlayerCommand(blockId, actorId)` réservé à l'auteur (`NotBlockOwnerProblem`). L'effet est symétrique :
+  `PlayerBlockFollowHandler` retire les abonnements dans les deux sens ; le BFF refuse défi, abonnement et salon
+  partagé entre les deux, et exclut la paire de l'appariement.
 - Aucune dépendance sortante.
 
 ## Lectures fournies (`joutio-social-domain`)
@@ -24,12 +28,15 @@ Lire : `../../AGENTS.md`, [`docs/backend/`](../../docs/backend/hexagonal.md), ex
   - `ExistsUserFollowerQuery(followerId, followedId)`.
 - `TopicFollowerQuery` : `GetTopicFollowsQuery(userId, limit)`,
   `ExistsTopicFollowerQuery(topicId, userId)`.
+- `PlayerBlockQuery` : `GetBlockedPlayersQuery(userId)` (joueurs bloqués par lui),
+  `GetBlockRelationsQuery(userId)` (joueurs en relation de blocage, dans un sens ou dans l'autre).
 - `Search*Query` : surfaces d'administration seulement.
 
 Événements consommés ailleurs :
 - `UserFollowedEvent` → notification (`FOLLOW`), profile (badge Social), BFF (purge du cache des
   compteurs) ;
-- `UserUnfollowedEvent` → BFF.
+- `UserUnfollowedEvent` → BFF ;
+- `PlayerBlockedEvent` → matchmaking (annule les défis en attente entre les deux), BFF.
 
 ## Commandes
 

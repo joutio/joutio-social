@@ -50,4 +50,23 @@ public final class SocialExceptions {
                     Map.of("followId", followId, "actorId", actorId));
         }
     }
+
+    public static class CannotBlockSelfProblem extends SocialProblem {
+        public CannotBlockSelfProblem(String userId) {
+            super("urn:joutio:social:user:blockSelf",
+                    "Cannot block yourself",
+                    "User " + userId + " cannot block themselves",
+                    Map.of("userId", userId));
+        }
+    }
+
+    public static class NotBlockOwnerProblem extends SocialProblem {
+        public NotBlockOwnerProblem(String blockId, String actorId) {
+            super("urn:joutio:social:block:notOwner",
+                    ProblemCategory.PERMISSION,
+                    "Not the owner of this block",
+                    "User " + actorId + " cannot remove the block " + blockId,
+                    Map.of("blockId", blockId, "actorId", actorId));
+        }
+    }
 }
