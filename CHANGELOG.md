@@ -1,3 +1,9 @@
+## [1.1.9](https://github.com/joutio/joutio-social/compare/v1.1.8...v1.1.9) (2026-11-20)
+
+### Bug Fixes
+
+* **deps:** joutio-parent 2.4.0, instance-scoped groups on one Kafka consumer per pod ([d20cf1d](https://github.com/joutio/joutio-social/commit/d20cf1da8835f0b73d2e86528a9f21e89cd044dd))
+
 ## [1.1.8](https://github.com/joutio/joutio-social/compare/v1.1.7...v1.1.8) (2026-11-20)
 
 ### Bug Fixes
