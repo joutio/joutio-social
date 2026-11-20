@@ -1,7 +1,7 @@
 package com.joutio.social.domain.aggregate;
 
-import com.joutio.social.domain.command.PlayerBlockCommand;
-import com.joutio.social.domain.event.PlayerBlockEvent;
+import com.joutio.social.domain.command.UserBlockCommand;
+import com.joutio.social.domain.event.UserBlockEvent;
 import com.joutio.social.domain.exception.SocialExceptions;
 import lombok.Getter;
 import org.axonframework.commandhandling.CommandHandler;
@@ -20,7 +20,7 @@ import java.time.Instant;
  */
 @Getter
 @Aggregate
-public class PlayerBlockAggregate {
+public class UserBlockAggregate {
 
     @AggregateIdentifier
     private String blockId;
@@ -28,36 +28,36 @@ public class PlayerBlockAggregate {
     private String blockedId;
     private boolean blocked;
 
-    protected PlayerBlockAggregate() {
+    protected UserBlockAggregate() {
     }
 
     @CommandHandler
     @CreationPolicy(AggregateCreationPolicy.CREATE_IF_MISSING)
-    public void handle(PlayerBlockCommand.BlockPlayerCommand command) {
+    public void handle(UserBlockCommand.BlockUserCommand command) {
         if (blocked) {
             return;
         }
         if (command.blockerId().equals(command.blockedId())) {
             throw new SocialExceptions.CannotBlockSelfProblem(command.blockerId());
         }
-        AggregateLifecycle.apply(new PlayerBlockEvent.PlayerBlockedEvent(
+        AggregateLifecycle.apply(new UserBlockEvent.UserBlockedEvent(
                 command.blockId(), command.blockerId(), command.blockedId(), Instant.now()));
     }
 
     @CommandHandler
-    public void handle(PlayerBlockCommand.UnblockPlayerCommand command) {
+    public void handle(UserBlockCommand.UnblockUserCommand command) {
         if (!blocked) {
             return;
         }
         if (!blockerId.equals(command.actorId())) {
             throw new SocialExceptions.NotBlockOwnerProblem(blockId, command.actorId());
         }
-        AggregateLifecycle.apply(new PlayerBlockEvent.PlayerUnblockedEvent(
+        AggregateLifecycle.apply(new UserBlockEvent.UserUnblockedEvent(
                 blockId, blockerId, blockedId, Instant.now()));
     }
 
     @EventSourcingHandler
-    public void on(PlayerBlockEvent.PlayerBlockedEvent event) {
+    public void on(UserBlockEvent.UserBlockedEvent event) {
         this.blockId = event.blockId();
         this.blockerId = event.blockerId();
         this.blockedId = event.blockedId();
@@ -65,7 +65,7 @@ public class PlayerBlockAggregate {
     }
 
     @EventSourcingHandler
-    public void on(PlayerBlockEvent.PlayerUnblockedEvent event) {
+    public void on(UserBlockEvent.UserUnblockedEvent event) {
         this.blocked = false;
     }
 }

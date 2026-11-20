@@ -13,11 +13,11 @@ import java.time.Instant;
 @Setter
 @Getter
 @Entity
-@Table(name = "player_block", indexes = {
-        @Index(name = "idx_player_block_blocker", columnList = "blocker_id"),
-        @Index(name = "idx_player_block_blocked", columnList = "blocked_id")
+@Table(name = "user_block", indexes = {
+        @Index(name = "idx_user_block_blocker", columnList = "blocker_id"),
+        @Index(name = "idx_user_block_blocked", columnList = "blocked_id")
 })
-public class PlayerBlockEntity {
+public class UserBlockEntity {
 
     @Id
     @Column(name = "block_id", nullable = false)

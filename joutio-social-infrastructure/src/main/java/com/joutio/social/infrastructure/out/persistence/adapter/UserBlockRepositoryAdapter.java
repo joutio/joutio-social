@@ -1,25 +1,25 @@
 package com.joutio.social.infrastructure.out.persistence.adapter;
 
-import com.joutio.social.domain.model.PlayerBlock;
-import com.joutio.social.domain.port.out.PlayerBlockRepositoryPort;
-import com.joutio.social.infrastructure.out.persistence.entity.PlayerBlockEntity;
-import com.joutio.social.infrastructure.out.persistence.repository.PlayerBlockJpaRepository;
+import com.joutio.social.domain.model.UserBlock;
+import com.joutio.social.domain.port.out.UserBlockRepositoryPort;
+import com.joutio.social.infrastructure.out.persistence.entity.UserBlockEntity;
+import com.joutio.social.infrastructure.out.persistence.repository.UserBlockJpaRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class PlayerBlockRepositoryAdapter implements PlayerBlockRepositoryPort {
+public class UserBlockRepositoryAdapter implements UserBlockRepositoryPort {
 
-    private final PlayerBlockJpaRepository repository;
+    private final UserBlockJpaRepository repository;
 
-    public PlayerBlockRepositoryAdapter(PlayerBlockJpaRepository repository) {
+    public UserBlockRepositoryAdapter(UserBlockJpaRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public void save(PlayerBlock block) {
-        PlayerBlockEntity entity = new PlayerBlockEntity();
+    public void save(UserBlock block) {
+        UserBlockEntity entity = new UserBlockEntity();
         entity.setBlockId(block.blockId());
         entity.setBlockerId(block.blockerId());
         entity.setBlockedId(block.blockedId());
@@ -33,9 +33,9 @@ public class PlayerBlockRepositoryAdapter implements PlayerBlockRepositoryPort {
     }
 
     @Override
-    public List<PlayerBlock> findBlockedBy(String blockerId) {
+    public List<UserBlock> findBlockedBy(String blockerId) {
         return repository.findByBlockerIdOrderByBlockedAtDesc(blockerId).stream()
-                .map(entity -> new PlayerBlock(
+                .map(entity -> new UserBlock(
                         entity.getBlockId(), entity.getBlockerId(), entity.getBlockedId(), entity.getBlockedAt()))
                 .toList();
     }

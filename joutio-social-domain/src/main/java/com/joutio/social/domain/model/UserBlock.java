@@ -3,7 +3,7 @@ package com.joutio.social.domain.model;
 import java.time.Instant;
 
 /** Joueur bloqué par {@code blockerId} (read model). */
-public record PlayerBlock(
+public record UserBlock(
         String blockId,
         String blockerId,
         String blockedId,

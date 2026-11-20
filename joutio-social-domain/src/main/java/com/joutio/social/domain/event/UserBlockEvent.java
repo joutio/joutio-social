@@ -4,10 +4,10 @@ import java.time.Instant;
 
 /**
  * Blocage d'un joueur. L'effet est symétrique (ni l'un ni l'autre ne peut défier, suivre ou être apparié à l'autre) ;
- * {@code PlayerBlockedEvent} retire les abonnements entre les deux (social) et annule leurs défis en attente
+ * {@code UserBlockedEvent} retire les abonnements entre les deux (social) et annule leurs défis en attente
  * (matchmaking).
  */
-public interface PlayerBlockEvent {
+public interface UserBlockEvent {
 
     String blockId();
 
@@ -15,19 +15,19 @@ public interface PlayerBlockEvent {
 
     String blockedId();
 
-    record PlayerBlockedEvent(
+    record UserBlockedEvent(
             String blockId,
             String blockerId,
             String blockedId,
             Instant blockedAt
-    ) implements PlayerBlockEvent {
+    ) implements UserBlockEvent {
     }
 
-    record PlayerUnblockedEvent(
+    record UserUnblockedEvent(
             String blockId,
             String blockerId,
             String blockedId,
             Instant unblockedAt
-    ) implements PlayerBlockEvent {
+    ) implements UserBlockEvent {
     }
 }

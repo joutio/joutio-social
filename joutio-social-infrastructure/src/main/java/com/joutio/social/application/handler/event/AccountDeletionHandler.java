@@ -31,14 +31,14 @@ public class AccountDeletionHandler {
                 UNION
                 SELECT follow_id FROM user_follower WHERE follower_id = ? OR followed_id = ?
                 UNION
-                SELECT block_id FROM player_block WHERE blocker_id = ? OR blocked_id = ?
+                SELECT block_id FROM user_block WHERE blocker_id = ? OR blocked_id = ?
                 """, String.class, userId, userId, userId, userId, userId);
         jdbcTemplate.update("DELETE FROM topic_follower WHERE user_id = ?", userId);
         jdbcTemplate.update(
                 "DELETE FROM user_follower WHERE follower_id = ? OR followed_id = ?",
                 userId, userId);
         jdbcTemplate.update(
-                "DELETE FROM player_block WHERE blocker_id = ? OR blocked_id = ?",
+                "DELETE FROM user_block WHERE blocker_id = ? OR blocked_id = ?",
                 userId, userId);
         eventStoreErasureService.eraseAggregates(followIds);
     }
