@@ -1,3 +1,9 @@
+## [1.1.12](https://github.com/joutio/joutio-social/compare/v1.1.11...v1.1.12) (2026-11-20)
+
+### Bug Fixes
+
+* **deps:** joutio-parent 2.4.1 with patched dependencies ([6b39cbb](https://github.com/joutio/joutio-social/commit/6b39cbb0ad1fac42c3dc917a361dbbb8ebc94971))
+
 ## [1.1.11](https://github.com/joutio/joutio-social/compare/v1.1.10...v1.1.11) (2026-11-20)
 
 ### Performance Improvements
