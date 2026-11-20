@@ -1,3 +1,9 @@
+## [1.1.6](https://github.com/joutio/joutio-social/compare/v1.1.5...v1.1.6) (2026-11-20)
+
+### Bug Fixes
+
+* **deps:** joutio-parent 2.2.0, kafka consumer, segment and rebalancer metrics ([974ed4b](https://github.com/joutio/joutio-social/commit/974ed4bd0f33746678ddf14d96747e3615769220))
+
 ## [1.1.5](https://github.com/joutio/joutio-social/compare/v1.1.4...v1.1.5) (2026-11-19)
 
 ### Bug Fixes
