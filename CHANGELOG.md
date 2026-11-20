@@ -1,3 +1,15 @@
+## [2.0.0](https://github.com/joutio/joutio-social/compare/v1.2.0...v2.0.0) (2026-11-20)
+
+### ⚠ BREAKING CHANGES
+
+* **block:** PlayerBlockedEvent/PlayerUnblockedEvent, BlockPlayerCommand,
+UnblockPlayerCommand and GetBlockedPlayersQuery are renamed UserBlocked/
+UserUnblockedEvent, BlockUserCommand, UnblockUserCommand, GetBlockedUsersQuery.
+
+### Code Refactoring
+
+* **block:** name blocks after users, like follows ([f46f64c](https://github.com/joutio/joutio-social/commit/f46f64c96255b1c70a53341bffd43d8ed56a363d))
+
 ## [1.2.0](https://github.com/joutio/joutio-social/compare/v1.1.12...v1.2.0) (2026-11-20)
 
 ### Features
