@@ -1,3 +1,9 @@
+## [1.1.10](https://github.com/joutio/joutio-social/compare/v1.1.9...v1.1.10) (2026-11-20)
+
+### Bug Fixes
+
+* **docker:** rebuild on patched base images ([11eba22](https://github.com/joutio/joutio-social/commit/11eba22f0cce3cb4624c1aed598965ad944b82eb))
+
 ## [1.1.9](https://github.com/joutio/joutio-social/compare/v1.1.8...v1.1.9) (2026-11-20)
 
 ### Bug Fixes
