@@ -36,7 +36,7 @@ Lire : `../../AGENTS.md`, [`docs/backend/`](../../docs/backend/hexagonal.md), ex
 - `UserFollowedEvent` → notification (`FOLLOW`), profile (badge Social), BFF (purge du cache des
   compteurs) ;
 - `UserUnfollowedEvent` → BFF ;
-- `UserBlockedEvent` → matchmaking (annule les défis en attente entre les deux), BFF.
+- `UserBlockedEvent` → matchmaking (annule les salles ouvertes entre les deux, défis compris), BFF.
 
 ## Commandes
 
