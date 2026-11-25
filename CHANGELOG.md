@@ -1,3 +1,9 @@
+## [2.0.2](https://github.com/joutio/joutio-social/compare/v2.0.1...v2.0.2) (2026-11-25)
+
+### Bug Fixes
+
+* **deps:** pin joutio-identity-domain 2.5.1, the 2.4.2 pin was never published ([48a5fa9](https://github.com/joutio/joutio-social/commit/48a5fa9b712364b2ac1db595eafb62b75114b10c))
+
 ## [2.0.1](https://github.com/joutio/joutio-social/compare/v2.0.0...v2.0.1) (2026-11-25)
 
 ### Bug Fixes
