@@ -1,3 +1,9 @@
+## [2.0.1](https://github.com/joutio/joutio-social/compare/v2.0.0...v2.0.1) (2026-11-25)
+
+### Bug Fixes
+
+* **deps:** joutio-parent 3.1.0 with the gRPC bus foundation ([cdb5dbf](https://github.com/joutio/joutio-social/commit/cdb5dbf2b6b977320f90d6df062ac593aa9efb3b))
+
 ## [2.0.0](https://github.com/joutio/joutio-social/compare/v1.2.0...v2.0.0) (2026-11-20)
 
 ### ⚠ BREAKING CHANGES
