@@ -1,3 +1,9 @@
+## [2.1.0](https://github.com/joutio/joutio-social/compare/v2.0.3...v2.1.0) (2026-11-26)
+
+### Features
+
+* **live:** watch query feeding the BFF caches ([4fae5f6](https://github.com/joutio/joutio-social/commit/4fae5f63033be09fd17fb5ca63a1e87c6ccaf0ff))
+
 ## [2.0.3](https://github.com/joutio/joutio-social/compare/v2.0.2...v2.0.3) (2026-11-25)
 
 ### Bug Fixes
