@@ -28,4 +28,11 @@ public interface UserFollowerQuery {
      */
     record ExistsUserFollowerQuery(String followerId, String followedId) implements UserFollowerQuery {
     }
+
+    /**
+     * Surveillance des compteurs de tous les joueurs, pour les caches du BFF : aucun résultat initial (liste vide), puis
+     * un {@code UserFollowCountsUpdate} à chaque changement. Les lectures passent par {@link GetUserFollowCountsQuery}.
+     */
+    record WatchUserFollowCountsQuery() implements UserFollowerQuery {
+    }
 }

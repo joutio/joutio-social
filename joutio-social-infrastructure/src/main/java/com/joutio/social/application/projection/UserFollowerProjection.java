@@ -1,5 +1,7 @@
 package com.joutio.social.application.projection;
 
+import com.joutio.social.application.service.FollowCountsLiveView;
+import java.util.List;
 import com.joutio.social.domain.event.UserFollowerEvent;
 import com.joutio.social.domain.model.FollowerIds;
 import com.joutio.social.domain.model.UserFollower;
@@ -18,9 +20,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserFollowerProjection {
 
     private final UserFollowerRepositoryPort userFollowerRepositoryPort;
+    private final FollowCountsLiveView followCounts;
 
-    public UserFollowerProjection(UserFollowerRepositoryPort userFollowerRepositoryPort) {
+    public UserFollowerProjection(UserFollowerRepositoryPort userFollowerRepositoryPort,
+                                  FollowCountsLiveView followCounts) {
         this.userFollowerRepositoryPort = userFollowerRepositoryPort;
+        this.followCounts = followCounts;
     }
 
     @EventHandler
@@ -34,6 +39,7 @@ public class UserFollowerProjection {
                         event.followedAt()
                 )
         );
+        followCounts.changed(List.of(event.followerId(), event.followedId()));
     }
 
     @EventHandler
@@ -42,5 +48,6 @@ public class UserFollowerProjection {
         userFollowerRepositoryPort.deleteById(
                 FollowerIds.user(event.followerId(), event.followedId())
         );
+        followCounts.changed(List.of(event.followerId(), event.followedId()));
     }
 }

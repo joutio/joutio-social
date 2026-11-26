@@ -23,6 +23,8 @@ Lire : `../../AGENTS.md`, [`docs/backend/`](../../docs/backend/hexagonal.md), ex
 
 - `UserFollowerQuery` :
   - `GetUserFollowCountsQuery(userId)` ;
+  - `WatchUserFollowCountsQuery()` : surveillance pour les caches du BFF, `UserFollowCountsUpdate` émis par
+    `FollowCountsLiveView` à chaque abonnement, désabonnement ou suppression de compte (version `live_version`, V4) ;
   - `GetUserFollowsQuery(userId, direction, limit)`, consommée aussi par leaderboard pour la
     portée « abonnements » ;
   - `ExistsUserFollowerQuery(followerId, followedId)`.

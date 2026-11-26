@@ -1,5 +1,7 @@
 package com.joutio.social.application.handler.query;
 
+import com.joutio.social.application.service.FollowCountsLiveView;
+import com.joutio.social.domain.model.UserFollowCountsUpdate;
 import com.joutio.microservice.core.infrastructure.in.api.response.SearchResponse;
 import com.joutio.social.domain.exception.SocialExceptions;
 import com.joutio.social.domain.model.FollowDirection;
@@ -16,9 +18,12 @@ import java.util.List;
 public class UserFollowerQueryHandler {
 
     private final UserFollowerRepositoryPort userFollowerRepositoryPort;
+    private final FollowCountsLiveView followCounts;
 
-    public UserFollowerQueryHandler(UserFollowerRepositoryPort userFollowerRepositoryPort) {
+    public UserFollowerQueryHandler(UserFollowerRepositoryPort userFollowerRepositoryPort,
+                                    FollowCountsLiveView followCounts) {
         this.userFollowerRepositoryPort = userFollowerRepositoryPort;
+        this.followCounts = followCounts;
     }
 
     @QueryHandler
@@ -34,9 +39,13 @@ public class UserFollowerQueryHandler {
 
     @QueryHandler
     public UserFollowCounts handle(UserFollowerQuery.GetUserFollowCountsQuery query) {
-        return new UserFollowCounts(
-                userFollowerRepositoryPort.countFollowing(query.userId()),
-                userFollowerRepositoryPort.countFollowers(query.userId()));
+        return followCounts.read(query.userId());
+    }
+
+    /** Surveillance pour les caches du BFF : aucun résultat initial, les updates viennent de {@link FollowCountsLiveView}. */
+    @QueryHandler
+    public List<UserFollowCountsUpdate> handle(UserFollowerQuery.WatchUserFollowCountsQuery query) {
+        return List.of();
     }
 
     @QueryHandler
